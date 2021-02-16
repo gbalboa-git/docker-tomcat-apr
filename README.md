@@ -14,6 +14,8 @@ The default configuration of the resulting image includes the following:
 * [Security Manager](https://tomcat.apache.org/tomcat-9.0-doc/security-manager-howto.html#Configuring_Tomcat_With_A_SecurityManager) Enabled by default with some security settings enabled like suhut down port disabled by default, please read the Tomcat [Security Considerations](https://tomcat.apache.org/tomcat-9.0-doc/security-howto.html)  official documentation.
 * The resultant image does not contains the examples, ROOT and Documentation applications, only Manager and Host Manager.
 * You can add aditional Java options or Catalina optionss adding CATALINA_OPTS and/or JAVA_OPTS text files to the conf directory. (See examples section)
+* Admin default password: admin#904
+* Deployer default password: deployer#904
 
 ## How to use it
 
