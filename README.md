@@ -79,6 +79,7 @@ grant codeBase "file:${catalina.base}/webapps/your_app_name/-" {
 
 ### Build a new image
 
+Visit my git repository at [gbalboa-git](https://github.com/gbalboa-git/docker-tomcat-apr.git) and clone the repository with ``git clone https://github.com/gbalboa-git/docker-tomcat-apr.git`` <br>
 Available build args:
 * **VERSION:** Default value: 9.0.41 (also tested with 10.0.0)
 * **DEFAULT_JRE_PKG:** default-jdk
