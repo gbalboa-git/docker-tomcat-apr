@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Server port="-1" shutdown="4694fd8b99be3c761">
+  <Listener className="org.apache.catalina.startup.VersionLoggerListener" />  
+  <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />  
+  <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
+  <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
+  <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
+  <GlobalNamingResources>
+    <!-- Editable user database that can also be used by UserDatabaseRealm to authenticate users-->
+    <Resource name="UserDatabase" auth="Container"
+              type="org.apache.catalina.UserDatabase"
+              description="User database that can be updated and saved"
+              factory="org.apache.catalina.users.MemoryUserDatabaseFactory"
+              pathname="conf/tomcat-users.xml" />
+  </GlobalNamingResources>
+
+ 
+  <Service name="Catalina">
+    <Connector port="${port.http}" protocol="HTTP/1.1" connectionTimeout="20000" redirectPort="8443" />
+
+    <Connector port="${port.https}" protocol="org.apache.coyote.http11.Http11AprProtocol"
+               maxThreads="150" SSLEnabled="true" >
+        <UpgradeProtocol className="org.apache.coyote.http2.Http2Protocol" />
+        <SSLHostConfig>
+            <Certificate certificateKeyFile="${certs.key}"
+                         certificateFile="${certs.cert}"
+                         type="RSA" />
+        </SSLHostConfig>
+    </Connector>
+   
+                    
+    <Engine name="Catalina" defaultHost="localhost">
+
+      <!--
+          The password in the tomcat-users.xml must be encrypted with the 
+          $CATALINA_HOME/bin/digest.sh -a "PBKDF2WithHmacSHA512" -h "org.apache.catalina.realm.SecretKeyCredentialHandler" <password-to-crypt>
+          the output will be: <password-to-crypt>:<hash-to-store-in-tomcat-users-xml>
+      -->
+      <Realm className="org.apache.catalina.realm.LockOutRealm">
+        <Realm className="org.apache.catalina.realm.UserDatabaseRealm" resourceName="UserDatabase"> 
+            <CredentialHandler className="org.apache.catalina.realm.SecretKeyCredentialHandler"
+            algorithm="PBKDF2WithHmacSHA512"/>                    
+        </Realm>
+      </Realm>
+
+      <!--The container runs Tomcat server with security manager enabled, to be able to deploy apps, the
+          server administrator must gran explicit permissions into de catalina policy to the app
+        
+        example:
+        grant codeBase "file:${catalina.base}/webapps/<new_app>/-" {
+          permission org.apache.catalina.security.DeployXmlPermission "<new_app>";
+        };
+      -->
+      <Host name="localhost"  appBase="webapps"
+            unpackWARs="true" autoDeploy="true" copyXML="true" deployXML="true">
+
+        <!-- Access log processes all 
+            example.
+             Documentation at: /docs/config/valve.html
+             Note: The pattern used is equivalent to using pattern="common" -->
+        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+               prefix="localhost_access_log" suffix=".txt"
+               pattern="%h %l %u %t &quot;%r&quot; %s %b" />
+
+      </Host>
+    </Engine>
+  </Service>
+</Server>
