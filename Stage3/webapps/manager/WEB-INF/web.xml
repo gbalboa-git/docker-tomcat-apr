@@ -15,11 +15,11 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
-                      http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
-  version="4.0"
+  xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+                      https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+  version="6.0"
   metadata-complete="true">
 
   <display-name>Tomcat Manager Application</display-name>
@@ -44,7 +44,7 @@
     <init-param>
       <param-name>debug</param-name>
       <param-value>2</param-value>
-    </init-param>      
+    </init-param>
     <!-- Uncomment this to show proxy sessions from the Backup manager or a
          StoreManager in the sessions list for an application
     <init-param>
@@ -200,4 +200,17 @@
   <error-page>
     <location>/WEB-INF/jsp/error.jsp</location>
   </error-page>
+  <!--error-page>
+    <error-code>401</error-code>
+    <location>/WEB-INF/jsp/401.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>403</error-code>
+    <location>/WEB-INF/jsp/403.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/WEB-INF/jsp/404.jsp</location>
+  </error-page-->
+
 </web-app>

@@ -3,12 +3,13 @@
 # The objective of Base stage is to install Java, gosu and APR libraries on an
 # Ubuntu Image.
 # 
-# Also in the base stage defines the Enviroment variables to run Tomcat
+# Also in the base stage defines the Enviroment variables to run Tomcat 
 # 
 # ############################################################################### 
 
 FROM ubuntu as base
-ARG VERSION=9.0.41
+ARG VERSION=10.1.2
+ARG NATIVE_VERSION=2.0.2 
 ARG DEFAULT_JRE_PKG=default-jdk
 ARG PORT_HTTP=-1
 ARG PORT_SSL=8443
@@ -17,6 +18,7 @@ ARG TOMCAT_SERVICE_USR_UID=997
 ARG DBUG_PORT=-1
 
 ENV TOMCAT_VERSION=${VERSION}
+ENV TOMCAT_NATIVE_VERSION=${NATIVE_VERSION}
 ENV CATALINA_HOME=/opt/tomcat
 ENV JRE_HOME=/usr/lib/jvm/default-java
 ENV HTTP_TLS_CERTIFICATE=$CATALINA_HOME/certs/domain.crt
@@ -98,4 +100,4 @@ CMD ["bin/catalina.sh","run", "-security"]
 LABEL org.balvigu.maintainer="Gustavo Balboa <gbalboa@hotmail.com>" 
 LABEL org.balvigu.name="Tomcat-APR"
 LABEL org.balvigu.description="Apache Tomcat preconfigured to use APR implementation, SecurityManager, TSL, User passwords encrypted and running with a non root user"
-LABEL org.balvigu.version="1.0"
+LABEL org.balvigu.version="2.0"

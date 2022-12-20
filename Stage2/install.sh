@@ -22,16 +22,18 @@ rm -rf ${CATALINA_HOME}/bin/*.bat >/dev/null 2>&1
 # Lets extract and compile the tomcat native libraries (for use of APR)
 # cd $CATALINA_HOME/bin/
 tar xzf $CATALINA_HOME/bin/tomcat-native.tar.gz -C ${CATALINA_HOME}/bin
-cd $CATALINA_HOME/bin/tomcat-native-1.2.25-src/native/
-$CATALINA_HOME/bin/tomcat-native-1.2.25-src/native/configure \
-                  --with-java-home=$JRE_HOME \
-                  --with-ssl=yes \
-                  --prefix=$CATALINA_HOME
+cd $CATALINA_HOME/bin/tomcat-native-${TOMCAT_NATIVE_VERSION}-src/native/
+$CATALINA_HOME/bin/tomcat-native-${TOMCAT_NATIVE_VERSION}-src/native/configure \
+                    --with-java-home=$JRE_HOME \
+                    --with-ssl=/usr/lib/ssl \
+                    --prefix=$CATALINA_HOME
+
 make && make install
+
 
 # At this point the libraries are installed so lets delete the source files
 # that we used to compile it.
-rm -rf ${CATALINA_HOME}/bin/tomcat-native-1.2.25-src >/dev/null 2>&1
+rm -rf ${CATALINA_HOME}/bin/tomcat-native-${TOMCAT_NATIVE_VERSION}-src >/dev/null 2>&1
 rm -f ${CATALINA_HOME}/bin/tomcat-native.tar.gz >/dev/null 2>&1
 
 # Create the setenv.sh file to configure tomcat service with the env 

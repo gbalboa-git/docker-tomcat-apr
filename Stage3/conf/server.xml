@@ -18,8 +18,8 @@
   <Service name="Catalina">
     <Connector port="${port.http}" protocol="HTTP/1.1" connectionTimeout="20000" redirectPort="8443" />
 
-    <Connector port="${port.https}" protocol="org.apache.coyote.http11.Http11AprProtocol"
-               maxThreads="150" SSLEnabled="true" >
+    <Connector port="${port.https}" protocol="org.apache.coyote.http11.Http11Nio2Protocol" 
+        maxThreads="150" SSLEnabled="true" >
         <UpgradeProtocol className="org.apache.coyote.http2.Http2Protocol" />
         <SSLHostConfig>
             <Certificate certificateKeyFile="${certs.key}"
