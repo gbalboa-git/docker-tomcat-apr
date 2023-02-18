@@ -8,7 +8,7 @@
 # ############################################################################### 
 
 FROM ubuntu as base
-ARG VERSION=10.1.2
+ARG VERSION=10.1.5
 ARG NATIVE_VERSION=2.0.2 
 ARG DEFAULT_JRE_PKG=default-jdk
 ARG PORT_HTTP=-1
